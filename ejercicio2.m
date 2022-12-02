@@ -35,7 +35,7 @@ else
     disp('*********** EJECUTANDO EL INCISO 2 ***********');
     % Plot the signal
     elements = 100000;
-    n = [-30000:elements - 30000];
+    n = [-35300:elements - 35300];
     delta = deltaKronecker(n);
     y2 = diffCanal(delta, elements);
 
@@ -43,7 +43,7 @@ else
     set(figure2, 'Name', 'Inciso 2', 'NumberTitle', 'off');
 
     stemGraph(n, y2, 'Ecuación en diferencias', 'n', 'y2[n]');
-    xlim([0 30000]);
+    xlim([0 35300]);
     % Save the figure
     print figure2 -dpng '02_inciso_2'
 
@@ -65,12 +65,12 @@ else
     ylabel('x(t)');
 
     % Play sound
-    %sound(x, fs);
+    % sound(x, fs);
 
     % Save the figure
     print figure3 -dpng '02_audio_3'
 
-    y3 = diffCanal(x, size(x, 1));
+    y3 = diffCanal(x, size(x));
     figure4 = figure;
     set(figure4, 'Name', 'Inciso 3', 'NumberTitle', 'off');
 
@@ -81,7 +81,7 @@ else
     ylabel('y3(x)');
 
     % Play sound
-    sound(y3, fs);
+    % sound(y3, fs);
 
     % Save the figure
     print figure4 -dpng '02_inciso_3'
@@ -96,19 +96,20 @@ else
 
     % Plot the signal
     subplot(4, 1, 1);
+    y4 = diffCanal(delta, elements);
     stemGraph(n, y2, 'hCanalD', 'n', 'h[n]');
     xlim([-10000, (elements - 35500)]);
 
     subplot(4, 1, 2);
-    yf1 = fir1(y2, elements);
+    yf1 = fir1(y4, elements);
     graphFilterI4(n, yf1, elements, '1 rama');
     
     subplot(4, 1, 3);
-    yf2 = fir2(y2, elements);
+    yf2 = fir2(y4, elements);
     graphFilterI4(n, yf2, elements, '2 ramas');
 
     subplot(4, 1, 4);
-    yf3 = fir3(y2, elements);
+    yf3 = fir3(y4, elements);
     graphFilterI4(n, yf3, elements, '3 ramas');
 
     % Save the figure
